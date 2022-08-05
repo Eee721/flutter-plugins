@@ -11,7 +11,7 @@ class ClientMessageChannel {
     return windowEventChannel.invokeMethod(method, arguments);
   }
 
-  void setMessageHandler(MessageHandler? handler) {
+  void setMessageHandler(MessageHandler handler) {
     windowEventChannel.setMethodCallHandler(handler);
   }
 }

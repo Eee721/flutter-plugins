@@ -26,14 +26,14 @@ class DesktopMultiWindow {
   ///
   /// NOTE: [createWindow] will only create a new window, you need to call
   /// [WindowController.show] to show the window.
-  static Future<WindowController> createWindow([String? arguments]) async {
+  static Future<WindowController> createWindow([String arguments]) async {
     final windowId = await miltiWindowChannel.invokeMethod<int>(
       'createWindow',
       arguments,
     );
     assert(windowId != null, 'windowId is null');
-    assert(windowId! > 0, 'id must be greater than 0');
-    return WindowControllerMainImpl(windowId!);
+    assert(windowId > 0, 'id must be greater than 0');
+    return WindowControllerMainImpl(windowId);
   }
 
   /// Invoke method on the isolate of the window.
@@ -57,7 +57,7 @@ class DesktopMultiWindow {
   /// main window in main window isolate.
   ///
   static void setMethodHandler(
-      Future<dynamic> Function(MethodCall call, int fromWindowId)? handler) {
+      Future<dynamic> Function(MethodCall call, int fromWindowId) handler) {
     if (handler == null) {
       windowEventChannel.setMethodCallHandler(null);
       return;
